@@ -23,4 +23,17 @@ def apis(request):
     return HttpResponse(api)
 
 def keyword(request):
-    return render(request, 'todos.html', {'content':content})
+    entries = list(Apis.objects.values())
+    return JsonResponse(entries, safe=False)
+
+def category(request, category):
+    entries = list(Apis.objects.filter(category=category).values())
+    return JsonResponse(entries, safe=False)
+
+def ordered_list(request):
+    entries = list(Apis.objects.order_by('id').values())
+    return JsonResponse(entries, safe=False)
+
+def item(request, id):
+    entries = list(Apis.objects.filter(id=id).values())
+    return JsonResponse(entries, safe=False)
