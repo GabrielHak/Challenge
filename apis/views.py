@@ -22,12 +22,16 @@ def apis(request):
 
     return HttpResponse(api)
 
-def keyword(request):
+def keyword(request, key):
     entries = list(Apis.objects.values())
-    return JsonResponse(entries, safe=False)
+    listTo = []
+    for entrie in entries:
+        if entrie['api'][0] == key.capitalize() or entrie['api'][0] == key.casefold():
+            listTo.append(entrie)
+    return JsonResponse(listTo, safe=False)
 
 def category(request, category):
-    entries = list(Apis.objects.filter(category=category).values())
+    entries = list(Apis.objects.filter(category=category.capitalize()).values())
     return JsonResponse(entries, safe=False)
 
 def ordered_list(request):

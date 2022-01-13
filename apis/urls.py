@@ -6,7 +6,7 @@ app_name='apis'
 
 urlpatterns = [
     path('populate-apis/', apis),
-    path('keyword/', keyword),
+    path('keyword/<key>/', keyword),
     path('category/<category>/', category),
     path('ordered-list/', ordered_list),
     path('item/<int:id>/', item)
